@@ -45,7 +45,31 @@ void enterMathGrade() {
 }
 
 void enterPhysicsGrade() {
-    // разрабатывается Петровым П. - ветка branch_fun_2
+    const map<char, string> validGrades = {
+        {'A', "Отлично (5)"},
+        {'B', "Хорошо (4)"},
+        {'C', "Удовлетворительно (3)"},
+        {'D', "Неудовлетворительно (2)"},
+        {'F', "Неудача (1)"}
+    };
+
+    while (true) {
+        cout << "\nВведите оценку по химии (A, B, C, D, F): ";
+        char input;
+        cin >> input;
+        input = toupper(input);
+
+        if (validGrades.find(input) != validGrades.end()) {
+            chemistryGrade = input;
+            cout << "Оценка по химии: " << chemistryGrade 
+                 << " " << validGrades.at(chemistryGrade) << "\n";
+            break;
+        } else {
+            cout << "Ошибка! Допустимые оценки: A, B, C, D, F. Попробуйте снова.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 }
 
 void enterChemistryGrade() {
