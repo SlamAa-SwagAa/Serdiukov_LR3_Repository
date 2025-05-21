@@ -101,7 +101,24 @@ void enterPhisicsGrade() {
 }
 
 void calculateAverage() {
+    if (mathGrade == ' ' || physicsGrade == ' ' || chemistryGrade == ' ') {
+        cout << "Ошибка! Сначала введите оценки по всем предметам.\n";
+        return;
+    }
 
+    map<char, double> gradeToScore = {
+        {'A', 5.0},
+        {'B', 4.0},
+        {'C', 3.0},
+        {'D', 2.0},
+        {'F', 1.0}
+    };
+
+    double average = (gradeToScore[mathGrade] + 
+                     gradeToScore[physicsGrade] + 
+                     gradeToScore[chemistryGrade]) / 3;
+
+    cout << "\nСредний балл: " << average << "\n";
 }
 
 void checkAverageAbove4() {
