@@ -1,6 +1,13 @@
 #include <iostream>
 #include <string>
+#include <map>
+#include <cctype>
+#include <limits>
 using namespace std;
+
+char mathGrade = ' ';
+char physicsGrade = ' ';
+char chemistryGrade = ' ';
 
 void enterMathGrade();
 void enterPhysicsGrade();
@@ -9,7 +16,32 @@ void calculateAverage();
 void checkAverageAbove4();
 
 void enterMathGrade() {
-    // разрабатывается Ивановым И. - ветка branch_fun_1
+    const map<char, string> validGrades = {
+        {'A', "Отлично"},
+        {'B', "Хорошо"},
+        {'C', "Удовлетворительно"},
+        {'D', "Неудовлетворительно"},
+        {'F', "Неудача"}
+    };
+
+    while (true) {
+        cout << "\nВведите оценку по математике (A, B, C, D, F): ";
+        char input;
+        cin >> input;
+        input = toupper(input);
+
+        
+        if (validGrades.find(input) != validGrades.end()) {
+            mathGrade = input;
+            cout << "Оценка по математике: " << mathGrade 
+                 << " (" << validGrades.at(mathGrade) << ")\n";
+            break;
+        } else {
+            cout << "Ошибка! Допустимые оценки: A, B, C, D, F. Попробуйте снова.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
 }
 
 void enterPhysicsGrade() {
